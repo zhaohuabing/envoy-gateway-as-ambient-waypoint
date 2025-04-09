@@ -37,8 +37,8 @@ Create a test application to test the ambient service mesh. This manifest also c
 Some key points:
 
 - The gatewayClassName is set to `eg` to use the Envoy Gateway as the controller to deploy the waypoint proxy.
-- Since the waypoint proxy deployed by Envoy Gateway does not handle HBONE, a label `istio.io/dataplane-mode: ambient` is added to the Gateway resource to indicat the Ztunnel to intercept the
-inbound and outbound traffic and handle HBONE for the waypoint proxy, which is also known as the "Sandwitch mode".
+- Since the waypoint proxy deployed by Envoy Gateway does not handle HBONE, a label `istio.io/dataplane-mode: ambient` is added to the Gateway resource to indicat that the Ztunnel needs to intercept the
+inbound and outbound traffic and handle HBONE for the waypoint proxy, which is also known as the "sandwich mode".
 - A label `istio.io/use-waypoint: eg-waypoint` is added to the Backend service to indicate that the service should use the `eg-waypoint` waypoint proxy.
 
 ```bash
