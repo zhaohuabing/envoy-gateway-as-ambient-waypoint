@@ -1,0 +1,32 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  labels:
+    istio.io/dataplane-mode: ambient
+  name: bookinfo-ingress
+spec:
+  gatewayClassName: eg-ingress
+  listeners:
+  - allowedRoutes:
+      namespaces:
+        from: Same
+    name: ingress
+    port: 80
+    protocol: HTTP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ingress-bookinfo
+spec:
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: bookinfo-ingress
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: productpage
+      port: 9080
