@@ -17,7 +17,7 @@ The
 ```bash
 helm install eg oci://docker.io/envoyproxy/gateway-helm \
   --version v0.0.0-latest \
-  --set config.provider.kubernetes.deploy.type=GatewayNamespace \
+  --set config.envoyGateway.provider.kubernetes.deploy.type=GatewayNamespace \
   -n envoy-gateway-system \
   --create-namespace
 ```
@@ -95,7 +95,7 @@ Defaulted container "envoy" out of: envoy, shutdown-manager
 
 - The gatewayClassName is set to `eg-ingress` and `eg-waypoint` to use the Envoy Gateway as the controller to deploy the ingress gateway and the waypoint proxy.
 - Since the waypoint proxy deployed by Envoy Gateway does not handle HBONE, a label `istio.io/dataplane-mode: ambient` is added to the Gateway resource to indicat that the Ztunnel needs to intercept the inbound and outbound traffic and handle HBONE for the waypoint proxy, which is also known as the "sandwich mode".
-- A label `istio.io/use-waypoint: eg-waypoint` is added to the Backend service to indicate that the service should use the `eg-waypoint` waypoint proxy.
+- A label `istio.io/use-waypoint: reviews-waypoint` is added to the reviews service to indicate that the reviews service should use the `reviews-waypoint` Gateway as the waypoint proxy.
 
 
 ## Try Envoy Gateway's Layer 7 features
